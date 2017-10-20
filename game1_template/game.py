@@ -16,12 +16,12 @@ def remove_punct(text):
     >>> remove_punct(",go!So.?uTh")
     'goSouTh'
     """
-    no_punc = ""
+    no_punctuation = ""
     for char in text:
-        if (not char.isalpha()) and (not char.isspace()):
-            char = ""
-        no_punc = no_punc + char
-    return no_punc
+        if not (char in string.punctuation):
+            no_punctuation = no_punctuation + char
+
+    return no_punctuation
     
     
 def remove_spaces(text):
@@ -84,7 +84,11 @@ def display_room(room):
 
     Note: <BLANKLINE> here means that doctest should expect a blank line.
     """
-    print("\n" + room["name"].upper() + "\n\n" + room["description"] + "\n")
+    print("")
+    print(room["name"].upper())
+    print("")
+    print(room["description"])
+    print("")
 
     
 def exit_leads_to(exits, direction):
