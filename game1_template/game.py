@@ -158,13 +158,7 @@ def is_valid_exit(exits, user_input):
     >>> is_valid_exit(rooms["Parking"]["exits"], "east")
     True
     """
-    try: 
-        exits[user_input]
-        return True
-    except KeyError:
-        return False
-
-
+    return user_input in exits
 
 
 def menu(exits):
@@ -178,15 +172,6 @@ def menu(exits):
     prompted, repeatedly, until a correct choice is entered."""
 
     # Repeat until the player enter a valid choice
-    while True:
-        print_menu(exits)
-        destination = input()
-        destination = normalise_input(destination)
-        if is_valid_exit(exits, destination) == False:
-            print("Input invalid!")
-        else:
-            return destination
-
 
         # COMPLETE THIS PART:
         
@@ -198,6 +183,15 @@ def menu(exits):
 
         # Check if the input makes sense (is valid exit)
             # If so, return the player's choice
+
+    while True:
+        print_menu(exits)
+        destination = input()
+        destination = normalise_input(destination)
+        if is_valid_exit(exits, destination) == False:
+            print("Input invalid!")
+        else:
+            return destination
 
 def move(exits, direction):
     """This function returns the room into which the player will move if, from a
@@ -211,9 +205,7 @@ def move(exits, direction):
     >>> move(rooms["Reception"]["exits"], "west") == rooms["Office"]
     False
     """
-    index = [exits][0][direction]
-    newroom = rooms[index]
-    return newroom
+    return rooms[exits[direction]]
 
 # This is the entry point of our program
 def main():
